@@ -124,12 +124,20 @@ public:
             Serial.println(mode);
           }
         }
+        else if (function == "sleep")
+        {
+          line++;
+          while (Serial.available() == 0);
+          unsigned int time = Serial.readStringUntil("\n").toInt();
+          delay(time);
+        }
         else if (function == "")
         {
           line++;
         }
         else
         {
+          line++;
           Serial.print("microboot.serialstream.BadFunctionError at line ");
           Serial.print(line);
           Serial.print(": ");

@@ -45,7 +45,38 @@ Write a digital value to a pin
 ### Syntax
 ```
 digitalwrite
-<pin>  <--- any integer (depends on board model)
-<mode> <--- high/low
+<pin>  <--- any digital or analog pin number (depends on board model)
+<value> <--- high/low
 ```
 Write &lt;mode&gt; to &lt;pin&gt;
+
+## sleep
+Do nothing for a specified amount of time
+
+### Syntax
+```
+sleep
+<time> <--- any positive integer
+```
+
+Do nothing for &lt;time&gt; milliseconds
+
+### Notes
+If the used serial monitor does not send strings ending with a line feed (LF), then any function sent via serial after this function is run will be interpreted as one line
+
+For example, if you do
+```
+sleep
+10000
+```
+and right after run
+```
+digitalwrite
+13
+high
+```
+then microboot will throw the error
+```
+microboot.serialstream.BadFunctionError at line 3: digitalwrite13high
+```
+To fix this, set the line endings to LF in your serial monitor (automatically done in the Arduino IDE).
